@@ -1,0 +1,183 @@
+<mvc:View
+		controllerName="chatui.controller.Detail"
+		xmlns="sap.uxap"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:m="sap.m"
+		xmlns:f="sap.f"
+		xmlns:form="sap.ui.layout.form"
+		xmlns:unified="sap.ui.unified"
+		xmlns:table="sap.ui.table"
+		height="100%">
+		<ObjectPageLayout id="ObjectPageLayout"
+					showTitleInHeaderContent="true"
+					alwaysShowContentHeader="false"
+					preserveHeaderStateOnScroll="false"
+					headerContentPinnable="true"
+					isChildPage="true"
+					showFooter="true"
+					upperCaseAnchorBar="false">
+				<headerTitle>
+					<ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+						<expandedHeading>
+							<m:Title id="_IDGenTitle" text="{maintnot>title}" wrapping="true" class="sapUiSmallMarginEnd"/>
+						</expandedHeading>
+
+						<snappedHeading>
+							<m:FlexBox id="_IDGenFlexBox" wrap="Wrap" fitContainer="true" alignItems="Center">
+								<m:FlexBox id="_IDGenFlexBox1" wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+									<!-- <m:Avatar id="_IDGenAvatar" src="../../../../../../../{maintnot>ProductPicUrl}" displaySize="S" displayShape="Square"/> -->
+									<m:Title id="_IDGenTitle1" text="{maintnot>title}" wrapping="true" class="sapUiTinyMarginEnd"/>
+								</m:FlexBox>
+							</m:FlexBox>
+						</snappedHeading>
+
+						<!-- <navigationActions>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${view>/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${view>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose"  tooltip="Close middle column" visible="{= ${view>/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+						</navigationActions> -->
+
+						<actions>
+							<m:Button id="_IDGenButton"
+									text="Edit"
+									type="Emphasized"
+									press="toggleAreaPriority"/>
+							<m:Button id="_IDGenButton1"
+									text="Delete"
+									type="Transparent"/>
+							<m:Button id="_IDGenButton2"
+									text="AI助手"
+									type="Transparent"
+									press="onChat"/>
+							<!-- <m:Button
+									text="Toggle Footer"
+									type="Transparent"
+									press="onToggleFooter"/> -->
+							<m:Button id="_IDGenButton3"
+									icon="sap-icon://action"
+									type="Transparent"/>
+						</actions>
+
+					</ObjectPageDynamicHeaderTitle>
+				</headerTitle>
+
+				<headerContent>
+					<m:FlexBox id="_IDGenFlexBox2" wrap="Wrap" fitContainer="true" alignItems="Stretch">
+						<!-- <m:Avatar id="_IDGenAvatar1" src="../../../../../../../{maintnot>ProductPicUrl}"
+								  displaySize="L"
+								  displayShape="Square"
+								  class="sapUiTinyMarginEnd">
+						</m:Avatar> -->
+						<m:VBox id="_IDGenVBox" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label id="_IDGenLabel" text="设备"/>
+							<m:Text id="_IDGenText" text="{maintnot>equipment}"/>
+						</m:VBox>
+						<m:VBox id="_IDGenVBox1" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label id="_IDGenLabel1" text="位置"/>
+							<m:Text id="_IDGenText1" text="{maintnot>location}"/>
+						</m:VBox>
+						<m:VBox id="_IDGenVBox2" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label id="_IDGenLabel2" text="状态"/>
+							<m:Text id="_IDGenText2" text="{maintnot>status}"/>
+						</m:VBox>
+					</m:FlexBox>
+				</headerContent>
+
+		<sections>
+			<ObjectPageSection id="_IDGenObjectPageSection" title="General Information">
+				<subSections>
+					<ObjectPageSubSection id="_IDGenObjectPageSubSection">
+						<blocks>
+							<form:SimpleForm id="_IDGenSimpleForm"
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+								<form:content>
+									<m:Label id="_IDGenLabel3" text="创建者"/>
+									<m:Text id="_IDGenText3" text="{maintnot>operator}"/>
+									<m:Label id="_IDGenLabel4" text="描述"/>
+									<m:Text id="_IDGenText4" text="{maintnot>description}"/>
+									<m:Label id="_IDGenLabel5" text="工作中心"/>
+									<m:Text id="_IDGenText5" text="{maintnot>work_center}"/>
+								</form:content>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection id="_IDGenObjectPageSection1" title="备件">
+				<subSections>
+					<ObjectPageSubSection id="_IDGenObjectPageSubSection1">
+						<blocks>
+			<table:Table id="materialTable"
+				rows="{maintnot>to_material}"
+				selectionMode="None"
+				ariaLabelledBy="title">
+				<table:extension>
+					<m:OverflowToolbar id="_IDGenOverflowToolbar" style="Clear">
+						<m:Title id="title" text="备件"/>
+						<m:ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+						<unified:FileUploader id="_IDGenFileUploader" buttonOnly="true" buttonText="识别图片" change=".onFileChange" uploadComplete="handleUploadComplete"/>
+						
+					</m:OverflowToolbar>
+				</table:extension>
+
+				<table:columns>
+					<table:Column id="_IDGenColumn" width="10rem" hAlign="Center">
+						<m:Label id="_IDGenLabel6" text="图像" />
+						<table:template>
+							<m:Image id="_IDGenImage" src="{maintnot>imageUrl}" width="10rem" />
+						</table:template>
+					</table:Column>
+					<table:Column id="_IDGenColumn1" width="11rem" hAlign="Center">
+						<m:Label id="_IDGenLabel7" text="物料号" />
+						<table:template>
+							<m:ObjectIdentifier id="_IDGenObjectIdentifier" text="{maintnot>material_code}" />
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+							<!-- <m:Table
+								id="materialTable"
+								mode="SingleSelectMaster"
+								itemPress="handleItemPress"
+								items="{path : 'maintnot>to_material'}">
+												<m:headerToolbar>
+					<m:OverflowToolbar id="otbSubheader">
+						<m:ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+						<unified:FileUploader id="_IDGenFileUploader" buttonOnly="true" buttonText="识别图片" change=".onFileChange" uploadComplete="handleUploadComplete"/>
+					</m:OverflowToolbar>
+				</m:headerToolbar>
+								<m:columns>
+									<m:Column id="_IDGenColumn" />
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem id="_IDGenColumnListItem" type="Navigation">
+										<m:cells>
+											<m:ObjectIdentifier id="_IDGenObjectIdentifier" text="{maintnot>name}" />
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table> -->
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+		<footer>
+			<m:OverflowToolbar id="_IDGenOverflowToolbar2">
+				<m:ToolbarSpacer id="_IDGenToolbarSpacer"/>
+				<m:Button id="_IDGenButton4" type="Emphasized" text="保存" press="onSave"/>
+				<m:Button id="_IDGenButton5" type="Default" text="取消" press="onCancel" />
+			</m:OverflowToolbar>
+		</footer>
+	</ObjectPageLayout>
+		
+</mvc:View>

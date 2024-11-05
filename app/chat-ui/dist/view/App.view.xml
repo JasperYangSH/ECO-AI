@@ -1,0 +1,12 @@
+<mvc:View controllerName="chatui.controller.App"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+
+    <App id="app">
+        <!-- <f:FlexibleColumnLayout id="flexibleColumnLayout" backgroundDesign="Solid">
+        </f:FlexibleColumnLayout> -->
+    </App>
+    <!-- <Page id="page" title="{i18n>title}">
+        <content />
+    </Page> -->
+</mvc:View>

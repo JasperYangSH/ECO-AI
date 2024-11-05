@@ -1,0 +1,41 @@
+<core:FragmentDefinition 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+<Dialog
+    id="NewRequest"
+    title="创建维修通知单">
+	<f:SimpleForm id="SimpleFormChangeColumn_twoGroups234"
+					editable="true"
+					layout="ColumnLayout"
+					columnsM="2"
+					columnsL="2"
+					columnsXL="2">
+					<f:content>
+						<Label id="_IDGenLabel" text="设备" />
+						<Input id="_IDGenInput" required="true" change="onChange" value="{
+							path : 'req>/equipment',
+							type : 'sap.ui.model.type.String'
+						}" />
+						<Label id="_IDGenLabel1" required="true" text="位置" />
+						<Input id="_IDGenInput1" value="{req>/location}"></Input>
+					</f:content>
+				</f:SimpleForm>
+    
+    <beginButton>
+        <Button
+            id="submitBtn"
+            text="提交"
+            press=".onSubmitFragment"/>
+        </beginButton>
+            <endButton>
+        <Button
+            id="closeBtn2"
+            text="取消"
+            press=".onCloseFragment"/>
+        </endButton>
+</Dialog>
+    
+</core:FragmentDefinition>

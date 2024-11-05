@@ -1,0 +1,66 @@
+<core:FragmentDefinition
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="chatFragment"
+        title="AI Chat"
+        resizable="true"
+        draggable="true"
+        beforeOpen=".beforeChatDialogOpen"
+    >
+        <content>
+            <VBox id="officialRightScreenVBox">
+                <List
+                    id="officialRightScreenVBoxList"
+                    showNoData="false"
+                    showSeparators="Inner"
+                    items="{
+                        path:'chatModel>/chatHistory/',
+                        sorter:{
+                            path:'message_time',
+                            descending: false
+                        }
+                    }"
+                    busy="{chatModel>/isBusy}"
+                >
+                    <FeedListItem
+                        id="_IDGenFeedListItem1"
+                        class="feedListItem"
+                        convertLinksToAnchorTags="All"
+                        info="{chatModel>user_role}"
+                        text="{chatModel>content}"
+                        timestamp="{chatModel>message_time}"
+                        icon="{chatModel>icon_path}"
+                        iconInitials="{chatModel>initials}"
+                        showIcon="true"
+                    />
+                </List>
+            </VBox>
+        </content>
+        <footer>
+            <OverflowToolbar
+                id="officialRightScreenOverflowToolbar"
+                width="100%"
+                height="auto"
+            >
+                <FeedInput
+                    id="officialFeedInput"
+                    showIcon="false"
+                    placeholder="Enter your message...."
+                    growing="true"
+                    post=".onSendMessage"
+                    enabled="{chatModel>/enableTextArea}"
+                />
+            </OverflowToolbar>
+        </footer>
+        <endButton>
+            <Button
+                id="fileManagementFragCloseBtn"
+                text="Close"
+                press=".onCloseChatFragment"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,162 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "requestui",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.15.3",
+      "toolsId": "6ec933c4-2a2c-4474-8878-d242280d5452"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/chat/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      },
+      "fileService": {
+        "uri": "/odata/v4/embedding-storage/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      },
+      "maintenanceService": {
+        "uri": "/odata/v4/maintenance/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.9",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "requestui.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "files":{
+        "dataSource": "fileService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.f.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "requestui.view",
+        "controlId": "flexibleColumnLayout",
+        "transition": "slide"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "home",
+          "target": [
+            "leftScreen",
+            "initialRightScreen"
+          ],
+          "layout": "TwoColumnsMidExpanded"
+        },
+        {
+          "pattern": "conversation/{conversationID}",
+          "name": "conversation",
+          "target": [
+            "leftScreen",
+            "officalRightScreen"
+          ],
+          "layout": "TwoColumnsMidExpanded"
+        }
+      ],
+      "targets": {
+       "leftScreen": {
+          "viewId": "lefeScreenPage",
+          "viewName": "LeftScreen",
+          "controlAggregation": "beginColumnPages"
+        },
+        "initialRightScreen": {
+          "viewId": "initialRightScreen",
+          "viewName": "InitialRightScreen",
+          "controlAggregation": "midColumnPages"
+        },
+        "officalRightScreen": {
+          "viewId": "officalRightScreen",
+          "viewName": "OfficalRightScreen",
+          "controlAggregation": "midColumnPages"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "requestui.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}
